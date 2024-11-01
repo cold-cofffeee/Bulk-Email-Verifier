@@ -1,0 +1,38 @@
+                  <!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Bulk Email Validator</title>
+                    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                    <style>
+                      body {
+                        padding: 20px;
+                      }
+                    </style>
+                  </head>
+                  <body>
+                    <div class="container">
+                      <h1 class="mt-4 mb-4">Bulk Email Validator</h1>
+
+                      <form action="/" method="post">
+                        <div class="mb-3">
+                          <label for="inputText" class="form-label">Enter email addresses (one per line):</label>
+                          <textarea id="inputText" name="inputText" class="form-control" rows="10" cols="50"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Validate</button>
+                      </form>
+
+                      <% if (results) { %>
+                        <h2 class="mt-4">Validation Results:</h2>
+                        <ul class="list-group">
+                          <% results.forEach((result) => { %>
+                            <li class="list-group-item"><strong><%= result.email %></strong>: <%= result.isValid ? 'Valid' : 'Invalid' %> - <%= result.message %></li>
+                          <% }) %>
+                        </ul>
+                      <% } %>
+                    </div>
+
+                    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                  </body>
+                  </html>
