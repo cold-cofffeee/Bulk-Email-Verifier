@@ -1,0 +1,14 @@
+node_modules
+dist
+.env
+.vscode
+.DS_Store
+coverage
+*.log
+.idea
+*.iml
+.cache
+.next
+.upm
+out
+.replit

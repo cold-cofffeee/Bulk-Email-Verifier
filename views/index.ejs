@@ -18,16 +18,30 @@
                       <form action="/" method="post">
                         <div class="mb-3">
                           <label for="inputText" class="form-label">Enter email addresses (one per line):</label>
-                          <textarea id="inputText" name="inputText" class="form-control" rows="10" cols="50"></textarea>
+                          <textarea id="inputText" name="inputText" class="form-control" rows="10" cols="50" placeholder="example1@email.com&#10;example2@email.com&#10;example3@email.com"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Validate</button>
                       </form>
 
+                      <% if (error) { %>
+                        <div class="alert alert-danger mt-4" role="alert">
+                          <%= error %>
+                        </div>
+                      <% } %>
+
                       <% if (results) { %>
                         <h2 class="mt-4">Validation Results:</h2>
+                        <div class="alert alert-info" role="alert">
+                          <strong>Note:</strong> Validation uses domain MX record verification. This checks if the domain can receive emails but doesn't verify individual email existence due to SMTP restrictions.
+                        </div>
                         <ul class="list-group">
                           <% results.forEach((result) => { %>
-                            <li class="list-group-item"><strong><%= result.email %></strong>: <%= result.isValid ? 'Valid' : 'Invalid' %> - <%= result.message %></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <span><strong><%= result.email %></strong>: <%= result.message %></span>
+                              <span class="badge <%= result.isValid ? 'bg-success' : 'bg-danger' %>">
+                                <%= result.isValid ? 'Valid' : 'Invalid' %>
+                              </span>
+                            </li>
                           <% }) %>
                         </ul>
                       <% } %>
